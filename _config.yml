@@ -1,0 +1,26 @@
+title: The chylex non-periodical
+url: https://blog.chylex.com
+
+theme: jekyll-theme-cayman
+permalink: /:title
+paginate: 5
+paginate_path: /page/:num
+
+plugins:
+  - jekyll-paginate
+
+defaults:
+  -
+    scope:
+      path: "" # all files
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      subtitle: "%pub"
+      permalink: /post/:title
+      breadcrumbs:
+        - type: self

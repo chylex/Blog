@@ -1,0 +1,31 @@
+---
+titleimg: /assets/img/avatar.png
+---
+
+{% for post in paginator.posts %}
+  <article>
+    <div class="blog-entry-header">
+      <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+      <p class="date">{{ post.date | date: '%b %Y' }}</p>
+    </div>
+    <div class="blog-entry-content">{{ post.excerpt }}</div>
+  </article>
+  <hr>
+{% endfor %}
+
+<nav class="pagination">
+  <div>
+    {% if paginator.previous_page_path %}
+      <a href="{{ paginator.previous_page_path }}">&lsaquo; previous page</a>
+    {% else %}
+      <span class="inactive-link">&lsaquo; previous page</span>
+    {% endif %}
+  </div>
+  <div>
+    {% if paginator.next_page_path %}
+      <a href="{{ paginator.next_page_path }}">next page &rsaquo;</a>
+    {% else %}
+      <span class="inactive-link">next page &rsaquo;</span>
+    {% endif %}
+  </div>
+</nav>

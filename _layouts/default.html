@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    {% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#348fba">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    <header class="page-header" role="banner">
+      <h1 class="project-name">
+        {% if page.titleimg %}
+          <a href="https://chylex.com/" class="project-name-image"><img src="{{ page.titleimg }}" alt=""></a>
+        {% endif %}
+        <span class="project-name-text">{{ page.title | default: site.title }}</span>
+      </h1>
+      {% if page.subtitle %}
+        {% assign shortdate = page.date | date: '%b %Y' %}
+        {% assign published = 'published ' | append: shortdate %}
+        <h2 class="project-tagline">{{ page.subtitle | replace: '%pub', published }}</h2>
+      {% endif %}
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      {% if page.breadcrumbs %}
+        <nav class="page-breadcrumbs">
+          <a href="{{site.url}}">Home</a>
+          {% for crumb in page.breadcrumbs %}
+            <span> &nbsp;&raquo;&nbsp; </span>
+            
+            {% if crumb.type == 'self' %}
+              {% assign url = page.permalink %}
+              {% assign title = page.title %}
+            {% elsif crumb.revlatest %}
+              {% assign url = site.url | append: crumb.revlatest %}
+              {% assign title = page.title %}
+            {% elsif crumb.revcurrent %}
+              {% assign url = page.permalink %}
+              {% assign title = 'revision ' | append: crumb.revcurrent %}
+            {% endif %}
+            
+            {% if forloop.last %}
+              <span class="inactive-link">{{ title }}</span>
+            {% else %}
+              <a href="{{ url }}">{{ title }}</a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+        <hr>
+      {% endif %}
+      
+      {{ content }}
+      
+      {% if page.commentid %}
+        <script src="https://utteranc.es/client.js" repo="chylex/Blog" issue-number="{{ page.commentid }}" theme="github-light" crossorigin="anonymous" async></script>
+      {% endif %}
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">
+          <a href="https://chylex.com">My Website</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://twitter.com/chylexmc">Twitter</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://github.com/chylex">GitHub</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://patreon.com/chylex">Patreon</a>
+        </span>
+      </footer>
+    </main>
+  </body>
+</html>
