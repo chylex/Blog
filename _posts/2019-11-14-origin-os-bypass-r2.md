@@ -3,6 +3,13 @@ title: "Origin OS Version Bypass"
 subtitle: "revision 2, %pub"
 date: 2019-11-14
 commentid: 1
+
+permalink: /post/origin-os-bypass/revision-2
+hidden: true
+
+breadcrumbs:
+  - revlatest: /post/origin-os-bypass
+  - revcurrent: 2
 ---
 
 This guide shows how to hex-edit Origin to disable operating system check, which allows NFS Heat to download and install on Windows 7.
