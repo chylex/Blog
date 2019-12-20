@@ -1,7 +1,7 @@
 ---
 title: "Origin OS Version Bypass"
-subtitle: "revision 3, %pub"
-date: 2019-12-13
+subtitle: "revision 4, %pub"
+date: 2019-12-20
 commentid: 1
 ---
 
@@ -14,7 +14,8 @@ If this works for you, I'd appreciate if you [bought me a coffee](https://ko-fi.
 Get a hex editor that can handle big files. I'm using [HxD](https://mh-nexus.de/en/hxd/) (Portable).
 
 **Check your Origin.exe version:**
-- For **10.5.56.33908**, this revision should work
+- For **10.5.57.35162**, this revision should work
+- For **10.5.56.33908**, see [previous revision]({% post_url 2019-12-13-origin-os-bypass-r3 %})
 - For **10.5.55.33574**, see [previous revision]({% post_url 2019-11-14-origin-os-bypass-r2 %})
 - For **10.5.52.32372**, see [previous revision]({% post_url 2019-11-12-origin-os-bypass-r1 %})
 
@@ -44,18 +45,18 @@ In HxD, use *Search - Go to...* (Ctrl+G), paste in the offset, click OK, **make 
 
 | Offset | Old | New |
 | ------ | --- | --- |
-| 3CCE75 | 0F 84 37 01 00 00 | E9 38 01 00 00 90 |
-| 3CCFFA | 0F 84 4B 01 00 00 | E9 4C 01 00 00 90 |
+| 3CA505 | 0F 84 37 01 00 00 | E9 38 01 00 00 90 |
+| 3CA68A | 0F 84 4B 01 00 00 | E9 4C 01 00 00 90 |
 
 ## OriginClientService.exe
 
 | Offset | Old | New |
 | ------ | --- | --- |
-| 2EEA0 | 75 | EB |
-| 346D6 | 75 4D 68 4C 03 00 00 | E9 7C 03 00 00 90 90 |
-| 34752 | 75 | EB |
-| 348AF | 0F 84 46 01 00 00 | E9 47 01 00 00 90 |
-| 349BF | 0F 84 79 00 00 00 | E9 7A 00 00 00 90 |
+| 2F0C0 | 75 | EB |
+| 348D6 | 75 4D 68 4C 03 00 00 | E9 7C 03 00 00 90 90 |
+| 34952 | 75 | EB |
+| 34AAF | 0F 84 46 01 00 00 | E9 47 01 00 00 90 |
+| 34BBF | 0F 84 79 00 00 00 | E9 7A 00 00 00 90 |
 
 # Explanation
 
