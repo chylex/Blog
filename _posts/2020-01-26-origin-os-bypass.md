@@ -53,7 +53,7 @@ In HxD, use *Search - Go to...* (Ctrl+G), paste in the offset, click OK, **make 
 
 | Offset | Old | New |
 | ------ | --- | --- |
-| 2F2F1 | 75 | EB |
+| 2F2F0 | 75 | EB |
 | 34B46 | 75 4D 68 4C 03 00 00 | E9 7C 03 00 00 90 90 |
 | 34BC2 | 75 | EB |
 | 34D1F | 0F 84 46 01 00 00 | E9 47 01 00 00 90 |
