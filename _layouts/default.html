@@ -39,6 +39,9 @@
             {% elsif crumb.revcurrent %}
               {% assign url = page.permalink %}
               {% assign title = 'revision ' | append: crumb.revcurrent %}
+            {% elsif crumb.revcustom %}
+              {% assign url = page.permalink %}
+              {% assign title = crumb.revcustom %}
             {% endif %}
             
             {% if forloop.last %}
