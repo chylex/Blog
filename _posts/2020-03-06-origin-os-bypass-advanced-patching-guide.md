@@ -2,7 +2,7 @@
 title: "Origin OS Version Bypass"
 subtitle: "advanced patching guide, %pub"
 date: 2020-03-02
-commentid: 1
+commentid: 2
 
 permalink: /post/origin-os-bypass/advanced-patching-guide
 hidden: true
