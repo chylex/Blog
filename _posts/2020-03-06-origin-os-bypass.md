@@ -5,7 +5,7 @@ date: 2020-03-06
 commentid: 1
 ---
 
-This guide shows how to hex-edit Origin to disable operating system check, which allows NFS Heat to download and install on Windows 7.
+This guide shows how to download and run Need for Speed Heat on Windows 7 or Windows 8, by patching Origin to disable its operating system check.
 
 If this works for you, I'd appreciate if you [bought me a coffee](https://ko-fi.com/chylex).
 
@@ -24,7 +24,7 @@ Get a hex editor that can handle big files. I'm using [HxD](https://mh-nexus.de/
 
 If the most recent version is missing, please check the comments; if nobody has commented about it yet, please let me know.
 
-Alternatively, you can try the [advanced patching guide](https://blog.chylex.com/post/origin-os-bypass/advanced-patching-guide) that should work on any version, but the advanced guide is a lot more involved and there be dragons.
+Alternatively, you can try the [advanced patching guide]({% post_url 2020-03-06-origin-os-bypass-advanced-patching-guide %}) that should work on any version, but the advanced guide is a lot more involved and there be dragons.
 
 I recommend switching Origin to offline mode, because if the game needs an update, you will have to do this again.
 
