@@ -1,0 +1,136 @@
+[CmdletBinding()]
+Param(
+    [Parameter(Mandatory = $true, Position = 0)]
+    [System.IO.FileInfo] $FirefoxFolder
+)
+
+$ErrorActionPreference = "Stop"
+
+if (-Not (Test-Path -Path $FirefoxFolder -PathType Container)){
+    throw "Folder does not exist."
+}
+
+$OmniJa = Join-Path -Path $FirefoxFolder -ChildPath "omni.ja"
+$OmniJaOld = "$OmniJa.old"
+
+if (-Not (Test-Path -Path $OmniJa -PathType Leaf)){
+    throw "File 'omni.ja' was not found in the folder."
+}
+
+function Apply-Patch {
+    Param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [Byte[]] $Data,
+        [Parameter(Mandatory = $true, Position = 1)]
+        [Byte[]] $Search,
+        [Parameter(Mandatory = $true, Position = 2)]
+        [Byte[]] $Replace
+    )
+    
+    $Occurrences = 0
+    
+    $SearchLength = $Search.Length
+    $CheckLength = $Data.Length - $SearchLength
+    
+    for($i = 0; $i -lt $CheckLength; $i++){
+        if ($Data[$i] -ne $Search[0]){
+            continue
+        }
+        
+        $Matches = $true
+        
+        for($o = 1; $o -lt $SearchLength; $o++){
+            if ($Data[$i + $o] -ne $Search[$o]){
+                $Matches = $false
+                break
+            }
+        }
+        
+        if ($Matches){
+            for($o = 0; $o -lt $Replace.Length; $o++){
+                $Data[$i + $o] = $Replace[$o]
+            }
+            
+            $i += $Replace.Length
+            $Occurrences++
+        }
+    }
+    
+    return $Occurrences
+}
+
+Write-Host ""
+Write-Host "Patching omni.ja..."
+Write-Host ""
+
+[Byte[]] $Data = [System.IO.File]::ReadAllBytes($OmniJa)
+$Occurrences = 0
+
+$BytesSearch1 = [Byte[]](
+    0x74, 0x68, 0x69, 0x73, 0x2E, 0x6D, 0x4C, 0x61, 0x75, 0x6E, 0x63, 0x68, 0x65, 0x72, 0x2E, 0x74, # this.mLauncher.t
+    0x61, 0x72, 0x67, 0x65, 0x74, 0x46, 0x69, 0x6C, 0x65, 0x49, 0x73, 0x45, 0x78, 0x65, 0x63, 0x75, # argetFileIsExecu
+    0x74, 0x61, 0x62, 0x6C, 0x65                                                                    # table
+)
+
+$BytesReplace1 = [Byte[]](
+    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, #
+    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, #
+    0x66, 0x61, 0x6C, 0x73, 0x65                                                                    # false
+)
+
+$Attempt = Apply-Patch $Data $BytesSearch1 $BytesReplace1
+$Occurrences += $Attempt
+
+if ($Attempt -eq 1){ # most likely the occurrence added by second patch
+    Write-Host "It appears this installation is already patched."
+    exit
+}
+
+if ($Attempt -eq 0){
+    Write-Host "Found nothing to patch."
+    exit
+}
+
+$BytesSearch2a = [Byte[]](
+    0x0A, 0x20, 0x20, 0x20, 0x20, 0x29, 0x20, 0x7B, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x2F, # \n    ){\n     /
+    0x2F, 0x20, 0x4F, 0x70, 0x65, 0x6E, 0x20, 0x28, 0x75, 0x73, 0x69, 0x6E, 0x67, 0x20, 0x73, 0x79, # / Open (using sy
+    0x73, 0x74, 0x65, 0x6D, 0x20, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6C                                # stem defaul
+)
+
+$BytesReplace2a = [Byte[]](
+    0x7C, 0x7C, 0x74, 0x68, 0x69, 0x73, 0x2E, 0x6D, 0x4C, 0x61, 0x75, 0x6E, 0x63, 0x68, 0x65, 0x72, # ||this.mLauncher
+    0x2E, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x46, 0x69, 0x6C, 0x65, 0x49, 0x73, 0x45, 0x78, 0x65, # .targetFileIsExe
+    0x63, 0x75, 0x74, 0x61, 0x62, 0x6C, 0x65, 0x29, 0x7B, 0x2F, 0x2F                                # cutable){//
+)
+
+$BytesSearch2b = [Byte[]](
+    0x29, 0x20, 0x7B, 0x0A, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x2F, 0x2F, 0x20, 0x4F, 0x70, 0x65, # ) {\n     // Ope
+    0x6E, 0x20, 0x28, 0x75, 0x73, 0x69, 0x6E, 0x67, 0x20, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x20, # n (using system 
+    0x64, 0x65, 0x66, 0x61, 0x75, 0x6C, 0x74, 0x29, 0x2E                                            # default).
+)
+
+$BytesReplace2b = [Byte[]](
+   0x7C, 0x7C, 0x74, 0x68, 0x69, 0x73, 0x2E, 0x6D, 0x4C, 0x61, 0x75, 0x6E, 0x63, 0x68, 0x65, 0x72, # ||this.mLauncher
+   0x2E, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x46, 0x69, 0x6C, 0x65, 0x49, 0x73, 0x45, 0x78, 0x65, # .targetFileIsExe
+   0x63, 0x75, 0x74, 0x61, 0x62, 0x6C, 0x65, 0x29, 0x7B                                            # cutable){
+)
+
+$Attempt = Apply-Patch $Data $BytesSearch2a $BytesReplace2a
+
+if ($Attempt -eq 0){ # older versions
+    $Attempt = Apply-Patch $Data $BytesSearch2b $BytesReplace2b
+}
+
+$Occurrences += $Attempt
+
+if ($Occurrences -gt 0){
+    Move-Item -Path $OmniJa -Destination $OmniJaOld -Force
+    [System.IO.File]::WriteAllBytes($OmniJa, $Data)
+    
+    Write-Host "Applied $Occurrences patches."
+    Write-Host "Delete 'compatibility.ini' from your Firefox profile folder to regenerate the download dialog."
+    Write-Host "The original 'omni.ja' file is backed up as 'omni.ja.old'."
+}
+else{
+    Write-Host "Found nothing to patch."
+}
