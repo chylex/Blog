@@ -3,6 +3,13 @@ title: "Origin OS Version Bypass"
 subtitle: "revision 7, %pub"
 date: 2020-03-06
 commentid: 1
+
+permalink: /post/origin-os-bypass/revision-7
+hidden: true
+
+breadcrumbs:
+  - revlatest: /post/origin-os-bypass
+  - revcurrent: 7
 ---
 
 This guide shows how to download and run Need for Speed Heat on Windows 7 or Windows 8, by patching Origin to disable its operating system check.
