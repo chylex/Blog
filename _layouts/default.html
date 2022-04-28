@@ -1,18 +1,19 @@
+{% assign timestamp = site.time | date: "%s" %}
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "en" }}">
   <head>
     <meta charset="UTF-8">
     {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#348fba">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: timestamp | relative_url }}">
   </head>
   <body>
     <header class="page-header" role="banner">
       <h1 class="project-name">
         {% if page.titleimg %}
-          <a href="https://chylex.com/" class="project-name-image"><img src="{{ page.titleimg }}" alt=""></a>
+          <a href="https://chylex.com/" class="project-name-image"><img src="{{ page.titleimg | relative_url }}" alt=""></a>
         {% endif %}
         <span class="project-name-text">{{ page.title | default: site.title }}</span>
       </h1>
@@ -26,21 +27,21 @@
     <main id="content" class="main-content" role="main">
       {% if page.breadcrumbs %}
         <nav class="page-breadcrumbs">
-          <a href="{{site.url}}">Home</a>
+          <a href="{{ site.url }}{{ site.baseurl }}">Home</a>
           {% for crumb in page.breadcrumbs %}
             <span> &nbsp;&raquo;&nbsp; </span>
             
             {% if crumb.type == 'self' %}
-              {% assign url = page.permalink %}
+              {% assign url = page.permalink | relative_url %}
               {% assign title = page.title %}
             {% elsif crumb.revlatest %}
-              {% assign url = site.url | append: crumb.revlatest %}
+              {% assign url = site.url | append: site.baseurl | append: crumb.revlatest %}
               {% assign title = page.title %}
             {% elsif crumb.revcurrent %}
-              {% assign url = page.permalink %}
+              {% assign url = page.permalink | relative_url %}
               {% assign title = 'revision ' | append: crumb.revcurrent %}
             {% elsif crumb.revcustom %}
-              {% assign url = page.permalink %}
+              {% assign url = page.permalink | relative_url %}
               {% assign title = crumb.revcustom %}
             {% endif %}
             
