@@ -43,28 +43,28 @@ In HxD, use *Search - Go to...* (Ctrl+G), paste in the offset, click OK, **make 
 
 ## Origin.exe
 
-| Offset | Old | New |
-| ------ | --- | --- |
-| 1FE60 | 75 | EB |
-| 1FED1 | 75 | EB |
-| 1FF3B | 0F 85 92 00 00 00 | E9 93 00 00 00 90 |
-| 1FF8A | 75 | EB |
-| 29C30 | 0F 8F 07 01 00 00 | E9 08 01 00 00 90 |
-| 29D3F | 74 | EB |
+| Offset | Old               | New               |
+|--------|-------------------|-------------------|
+| 1FE60  | 75                | EB                |
+| 1FED1  | 75                | EB                |
+| 1FF3B  | 0F 85 92 00 00 00 | E9 93 00 00 00 90 |
+| 1FF8A  | 75                | EB                |
+| 29C30  | 0F 8F 07 01 00 00 | E9 08 01 00 00 90 |
+| 29D3F  | 74                | EB                |
 
 ## OriginClient.dll
 
-| Offset | Old | New |
-| ------ | --- | --- |
+| Offset | Old               | New               |
+|--------|-------------------|-------------------|
 | 386965 | 0F 84 37 01 00 00 | E9 38 01 00 00 90 |
 | 386AEA | 0F 84 4B 01 00 00 | E9 4C 01 00 00 90 |
 
 ## OriginClientService.exe
 
-| Offset | Old | New |
-| ------ | --- | --- |
-| 2E1AF | 75 | EB |
-| 42ABC | 0F 85 93 00 00 00 | E9 94 00 00 00 90 |
+| Offset | Old               | New               |
+|--------|-------------------|-------------------|
+| 2E1AF  | 75                | EB                |
+| 42ABC  | 0F 85 93 00 00 00 | E9 94 00 00 00 90 |
 
 # Explanation
 
