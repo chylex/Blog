@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#348fba">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon/apple-touch-icon.png' | relative_url }}">
+    <link rel="mask-icon" color="#d87c09" href="{{ '/assets/favicon/safari-pinned-tab.svg' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon/favicon-16x16.png' | relative_url }}">
+    <link rel="manifest" href="{{ 'site.webmanifest' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: timestamp | relative_url }}">
   </head>
   <body>
@@ -24,7 +29,7 @@
         <h2 class="project-tagline">{{ page.subtitle | replace: '%pub', published }}</h2>
       {% endif %}
     </header>
-
+    
     <main id="content" class="main-content" role="main">
       {% if page.breadcrumbs %}
         <nav class="page-breadcrumbs">
@@ -61,7 +66,7 @@
       {% if page.commentid %}
         <script src="https://utteranc.es/client.js" repo="chylex/Blog" issue-number="{{ page.commentid }}" theme="github-light" crossorigin="anonymous" async></script>
       {% endif %}
-
+      
       <footer class="site-footer">
         <span class="site-footer-owner">
           <a href="https://chylex.com">My Website</a>
