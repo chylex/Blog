@@ -53,8 +53,7 @@ a {
 }
 
 .project-name {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 
   @include large {
     font-size: 3rem;
@@ -70,7 +69,7 @@ a {
 }
 
 .project-tagline {
-  margin: 0 0 0.5rem;
+  margin: 0.5rem 0 0.25rem;
   font-weight: normal;
   opacity: 0.85;
 
@@ -83,7 +82,7 @@ a {
   }
 
   @include small {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 }
 
