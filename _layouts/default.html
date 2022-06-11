@@ -20,7 +20,9 @@
     <header class="page-header" role="banner">
       <h1 class="project-name">
         {% if page.titleimg %}
-          <a href="https://chylex.com/" class="project-name-image"><img src="{{ page.titleimg | relative_url }}" alt=""></a>
+          <a href="https://chylex.com/" class="project-name-image" aria-label="Visit chylex.com">
+            <img src="{{ page.titleimg | relative_url }}" alt="" width="120" height="120">
+          </a>
         {% endif %}
         <span class="project-name-text">{{ page.title | default: site.title }}</span>
       </h1>
