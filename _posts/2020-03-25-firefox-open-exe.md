@@ -9,15 +9,15 @@ Since Firefox 57, extensions such as OpenDownload² can no longer modify the Dow
 
 ### Before
 
-![Download dialog before the patch.](/assets/img/firefox-open-exe/before.png)
+![Download dialog before the patch.]({{ '/assets/img/firefox-open-exe/before.png' | relative_url }})
 
 ### After
 
-![Download dialog after the patch.](/assets/img/firefox-open-exe/after.png)
+![Download dialog after the patch.]({{ '/assets/img/firefox-open-exe/after.png' | relative_url }})
 
 # How to Use
 
-1. [Download the script](/assets/download/firefox-open-exe/FirefoxOpenExePatch.ps1)
+1. [Download the script]({{ '/assets/download/firefox-open-exe/FirefoxOpenExePatch.ps1' | relative_url }})
 2. Close Firefox
 3. Open PowerShell in the folder with the downloaded script
     - If you installed Firefox into a protected location (such as Program Files), you will need to run PowerShell as Administrator, and navigate to the script folder using `cd "<folder>"`
